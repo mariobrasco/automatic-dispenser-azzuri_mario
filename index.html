@@ -15,16 +15,17 @@
         <h1 class="judul_auto">Automatic Dispenser</h1><br><br>
             <div class="container_output">
                     <div class="mode">
-                        <label class="teks_mode">Mode</label><br><br>
-                        <div class="modeonoff">
-                            <button class="on">ON</button>
-                            <button class="off">OFF</button>
+                        <label class="teks_mode">Status</label><br><br>
+                        <div class="teks_status">
+                            <p class="value" id="status"></p>
                         </div>
                     </div>
                     <div class="jarak">
                         <label class="teks_jarak">Jarak</label><br><br>
                         <div class="output">
-                            <div class="jarak_output">1000</div>
+                            <div class="jarak_output">
+                                <p class="value" id="distance"></p>
+                            </div>
                             <div class="cm">
                                 <span>cm</span>
                             </div>
@@ -32,5 +33,49 @@
                     </div>         
             </div>
     </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyCpod57EuUr-Pmur6SA2EARwvNCNl24L0Q",
+          authDomain: "automation-dispenser-azzuri.firebaseapp.com",
+          databaseURL: "https://automation-dispenser-azzuri-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "automation-dispenser-azzuri",
+          storageBucket: "automation-dispenser-azzuri.firebasestorage.app",
+          messagingSenderId: "1041303536388",
+          appId: "1:1041303536388:web:fd198ab890d975c5c84651",
+          measurementId: "G-BFKXFRT3S4"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        //getting reference to the database
+        var database = firebase.database();
+
+        //getting reference to the data we want
+        var dataRef1 = database.ref('dispenser/distance');
+        var dataRef2 = database.ref('dispenser/status');
+
+        //fetch the data
+        dataRef1.on('value', function(getdata1){
+            var distance = getdata1.val();
+            document.getElementById('distance').innerHTML = distance + " cm";
+        })
+
+        dataRef2.on('value', function(getdata2){
+            var status = getdata2.val();
+            document.getElementById('status').innerHTML = status;
+        })
+      </script>
+
 </body>
 </html>
