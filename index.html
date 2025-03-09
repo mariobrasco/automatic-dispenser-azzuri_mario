@@ -17,7 +17,7 @@
                     <div class="mode">
                         <label class="teks_mode">Status</label><br><br>
                         <div class="teks_status">
-                            <p class="value" id="status"></p>
+                            <p class="value" id="status">Mati</p>
                         </div>
                     </div>
                     <div class="jarak">
@@ -26,13 +26,16 @@
                             <div class="jarak_output">
                                 <p class="value" id="distance"></p>
                             </div>
-                            <div class="cm">
-                                <span>cm</span>
-                            </div>
                         </div>
                     </div>         
             </div>
     </div>
+
+    <!-- the scripts for products you want to access must be added-->
+
+	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
 
     <script type="module">
         // Import the functions you need from the SDKs you need
@@ -55,8 +58,8 @@
         };
       
         // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
+        firebase.initializeApp(firebaseConfig);
+        // const analytics = getAnalytics(app);
 
         //getting reference to the database
         var database = firebase.database();
